@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "es6-promise": "^4.2.8",
+    "playwright": "^1.54.0",
+    "rosie": "^2.1.1"
+  },
+  "scripts": {
+    "test:api": "npx playwright test --project=api",
+    "test:ui": "npx playwright test --project=chromium",
+    "test:all": "npx playwright test"
+  },
+
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@playwright/test": "^1.54.0",
+    "@types/node": "^24.0.13",
+    "@types/rosie": "^0.0.45",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
+    "ts-node": "^10.9.2"
+  }
+}

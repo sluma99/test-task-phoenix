@@ -1,0 +1,7 @@
+node_modules
+.env
+.env.*
+.idea
+*.iml
+test-results
+playwright-report
