@@ -1,7 +1,6 @@
 import { test as base } from "@playwright/test";
 import {DashboardPage} from "../pages/dashboard.page";
 import {LoginPage} from "../pages/login.page";
-import {CreateTask} from "../components/create.task";
 
 export interface BaseFixture {
     dashboardPage: DashboardPage;

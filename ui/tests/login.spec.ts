@@ -1,7 +1,6 @@
 import {test} from "../fixture/base.fixture";
 import {testDataEmail, testDataWithInvalidEmail} from "../data/login.data";
 
-
 test.describe("Login", () => {
     test.beforeEach(async ({page}) => {
         await page.goto('/');
