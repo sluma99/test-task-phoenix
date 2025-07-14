@@ -11,7 +11,7 @@ test.afterEach(async ({apiClient}) => {
         const deleteUrl = `${ApiEndpoints.TASKS}/${createdTaskId}`;
         const response = await apiClient.delete(deleteUrl);
 
-        expect(204).toContain(response.status());
+        expect(response.status()).toBe(204);
     }
 });
 
@@ -23,9 +23,9 @@ test('[TC-9] - Should create a new task successfully', async ({apiClient}) => {
     });
 
     const body = await response.json();
+    
     expect(response.status()).toBe(201);
     expect(typeof body.id).toBe('string');
-
     expect(body.title).toBe(taskData.title);
     expect(body.description).toBe(taskData.description);
     expect(body.priority).toBe(taskData.priority);
@@ -35,18 +35,30 @@ test('[TC-9] - Should create a new task successfully', async ({apiClient}) => {
 test('[TC-10] - Should update an existing task', async ({apiClient}) => {
     const taskData = dataApiFactoryTask;
 
-    const response = await apiClient.post(ApiEndpoints.TASKS, {
+    const createResponse = await apiClient.post(ApiEndpoints.TASKS, {
         data: taskData
     });
 
-    const body = await response.json();
-    expect(response.status()).toBe(201);
-    expect(typeof body.id).toBe('string');
+    const createdTask = await createResponse.json();
 
-    expect(body.title).toBe(taskData.title);
-    expect(body.description).toBe(taskData.description);
-    expect(body.priority).toBe(taskData.priority);
-    expect(body.status).toBe(taskData.status);
+    createdTaskId = createdTask.id;
+
+    const updatedTaskData = dataApiFactoryTask;
+
+    const updateUrl = `${ApiEndpoints.TASKS}/${createdTask.id}`;
+
+    const updateResponse = await apiClient.put(updateUrl, {
+        data: updatedTaskData
+    });
+
+    const updatedTask = await updateResponse.json();
+    
+    expect(updateResponse.status()).toBe(200);
+    expect(updatedTask.id).toBe(createdTask.id);
+    expect(updatedTask.title).toBe(updatedTaskData.title);
+    expect(updatedTask.description).toBe(updatedTaskData.description);
+    expect(updatedTask.priority).toBe(updatedTaskData.priority);
+    expect(updatedTask.status).toBe(updatedTaskData.status);
 });
 
 test('[TC-11] - Should delete a task successfully', async ({apiClient}) => {
